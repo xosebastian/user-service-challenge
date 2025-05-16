@@ -91,7 +91,3 @@ Este proyecto está desplegado en Google Cloud Run utilizando GitHub Actions par
 ## Colección de Postman
 
 Se proporciona una colección de Postman en la raíz del proyecto llamada `User-Service-Collection.postman_collection.json`.
-
-## Licencia
-
-MIT
