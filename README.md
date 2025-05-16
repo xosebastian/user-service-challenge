@@ -86,7 +86,7 @@ npm run test:integration
 
 ## Despliegue
 
-Este proyecto está desplegado en Google Cloud Run utilizando GitHub Actions para despliegue automático. La configuración se encuentra en `.github/workflows/deploy.yml`.
+Este proyecto está desplegado en Google Cloud Run utilizando GitHub Actions para despliegue automático. La configuración se encuentra en `.github/workflows/deploy-gcp.yml`.
 
 ## Colección de Postman
 
