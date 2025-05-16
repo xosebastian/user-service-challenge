@@ -45,15 +45,19 @@ describe('CreateUserHandler', () => {
       const result = await handler.execute(command);
 
       expect(result).toEqual(user);
-      expect(userRepository.save).toHaveBeenCalledWith(expect.objectContaining({
-        name: 'John Doe',
-        age: 30,
-      }));
+      expect(userRepository.save).toHaveBeenCalledWith(
+        expect.objectContaining({
+          name: 'John Doe',
+          age: 30,
+        }),
+      );
     });
 
     it('should throw an error if user cannot be created', async () => {
       const command = new CreateUserCommand('John Doe', 30);
-      jest.spyOn(userRepository, 'save').mockRejectedValue(new Error('Database Error'));
+      jest
+        .spyOn(userRepository, 'save')
+        .mockRejectedValue(new Error('Database Error'));
 
       await expect(handler.execute(command)).rejects.toThrow('Database Error');
     });

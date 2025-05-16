@@ -36,7 +36,7 @@ export class UsersController {
   constructor(
     private readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus,
-  ) { }
+  ) {}
 
   @Post()
   @ApiOperation({ summary: 'Create a new user' })
@@ -54,7 +54,12 @@ export class UsersController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Get a user by UUID' })
-  @ApiParam({ name: 'id', type: String, format: 'uuid', description: 'User UUID' })
+  @ApiParam({
+    name: 'id',
+    type: String,
+    format: 'uuid',
+    description: 'User UUID',
+  })
   @ApiResponse({ status: 200, description: 'User details.' })
   @ApiNotFoundResponse({ description: 'User not found.' })
   async getUser(@Param() { id }: UUIDParamDto) {
@@ -74,10 +79,14 @@ export class UsersController {
     return this.queryBus.execute(query);
   }
 
-
   @Put(':id')
   @ApiOperation({ summary: 'Update a user' })
-  @ApiParam({ name: 'id', type: String, format: 'uuid', description: 'User UUID' })
+  @ApiParam({
+    name: 'id',
+    type: String,
+    format: 'uuid',
+    description: 'User UUID',
+  })
   @ApiBody({ type: UpdateUserDto })
   @ApiResponse({ status: 200, description: 'User successfully updated.' })
   @ApiNotFoundResponse({ description: 'User not found.' })
@@ -96,7 +105,12 @@ export class UsersController {
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete a user' })
-  @ApiParam({ name: 'id', type: String, format: 'uuid', description: 'User UUID' })
+  @ApiParam({
+    name: 'id',
+    type: String,
+    format: 'uuid',
+    description: 'User UUID',
+  })
   @ApiResponse({ status: 204, description: 'User successfully deleted.' })
   @ApiNotFoundResponse({ description: 'User not found.' })
   @HttpCode(HttpStatus.NO_CONTENT)

@@ -13,7 +13,9 @@ export class UserRepositoryImpl implements UserRepository {
 
   async save(user: User): Promise<User> {
     if (user.id) {
-      const existingUser = await this.userRepository.findOne({ where: { id: user.id } });
+      const existingUser = await this.userRepository.findOne({
+        where: { id: user.id },
+      });
       if (!existingUser) {
         throw new NotFoundException(`User with ID ${user.id} not found`);
       }

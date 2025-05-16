@@ -47,7 +47,9 @@ describe('UserRepositoryImpl', () => {
       user.age = 30;
 
       jest.spyOn(userRepository, 'findOne').mockResolvedValue(user);
-      jest.spyOn(userRepository, 'save').mockResolvedValue({ ...user, name: 'Updated Name' });
+      jest
+        .spyOn(userRepository, 'save')
+        .mockResolvedValue({ ...user, name: 'Updated Name' });
 
       const result = await repository.save({ ...user, name: 'Updated Name' });
       expect(result.name).toEqual('Updated Name');
@@ -71,7 +73,9 @@ describe('UserRepositoryImpl', () => {
       user.name = 'John Doe';
 
       jest.spyOn(userRepository, 'findOne').mockResolvedValue(user);
-      jest.spyOn(userRepository, 'delete').mockResolvedValue({ affected: 1 } as any);
+      jest
+        .spyOn(userRepository, 'delete')
+        .mockResolvedValue({ affected: 1 } as any);
 
       await expect(repository.delete('1')).resolves.toBeUndefined();
     });
@@ -83,7 +87,9 @@ describe('UserRepositoryImpl', () => {
 
     it('should throw an error if delete fails', async () => {
       jest.spyOn(userRepository, 'findOne').mockResolvedValue(new User());
-      jest.spyOn(userRepository, 'delete').mockRejectedValue(new Error('Database Error'));
+      jest
+        .spyOn(userRepository, 'delete')
+        .mockRejectedValue(new Error('Database Error'));
 
       await expect(repository.delete('1')).rejects.toThrow('Database Error');
     });

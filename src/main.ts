@@ -6,7 +6,7 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-    app.useGlobalPipes(
+  app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
       forbidNonWhitelisted: true,
@@ -16,7 +16,6 @@ async function bootstrap() {
       },
     }),
   );
-
 
   const config = new DocumentBuilder()
     .setTitle('User Service API')

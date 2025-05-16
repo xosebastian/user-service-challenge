@@ -55,10 +55,12 @@ describe('UpdateUserHandler', () => {
         age: 35,
       });
       expect(userRepository.findById).toHaveBeenCalledWith('1');
-      expect(userRepository.save).toHaveBeenCalledWith(expect.objectContaining({
-        name: 'Updated Name',
-        age: 35,
-      }));
+      expect(userRepository.save).toHaveBeenCalledWith(
+        expect.objectContaining({
+          name: 'Updated Name',
+          age: 35,
+        }),
+      );
     });
 
     it('should throw an error if user is not found', async () => {
@@ -77,7 +79,9 @@ describe('UpdateUserHandler', () => {
       existingUser.age = 30;
 
       jest.spyOn(userRepository, 'findById').mockResolvedValue(existingUser);
-      jest.spyOn(userRepository, 'save').mockRejectedValue(new Error('Database Error'));
+      jest
+        .spyOn(userRepository, 'save')
+        .mockRejectedValue(new Error('Database Error'));
 
       await expect(handler.execute(command)).rejects.toThrow('Database Error');
     });
