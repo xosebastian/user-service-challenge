@@ -79,10 +79,10 @@ jobs:
             --region us-central1 \
             --allow-unauthenticated \
             --port 8080 \
-            --set-env-vars DATABASE_HOST=${{ secrets.DATABASE_HOST }},DATABASE_PORT=${{ secrets.DATABASE_PORT }},DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }},DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }},DATABASE_NAME=${{ secrets.DATABASE_NAME }} \
+            --set-env-vars PORT=8080,DATABASE_HOST=${{ secrets.DATABASE_HOST }},DATABASE_PORT=${{ secrets.DATABASE_PORT }},DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }},DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }},DATABASE_NAME=${{ secrets.DATABASE_NAME }} \
             --cpu 1 \
             --memory 512Mi \
-            --timeout 300s \
+            --timeout 600s \
             --max-instances 3
 
       - name: Cleanup Service Account Key
