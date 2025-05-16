@@ -28,10 +28,14 @@ import configuration from './config/configuration';
           migrationsTableName: 'migrations',
           migrations: ['dist/migrations/*.js'],
           logging: false,
+          ssl: {
+            rejectUnauthorized: false,
+          },
+
         };
       },
     }),
     UsersModule,
   ],
 })
-export class AppModule {}
+export class AppModule { }
