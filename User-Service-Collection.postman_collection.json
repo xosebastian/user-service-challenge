@@ -3,7 +3,8 @@
 		"_postman_id": "9fe56547-c473-4afa-b895-4b992b667b23",
 		"name": "User Service Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "31128371"
+		"_exporter_id": "31128371",
+		"_collection_link": "https://xepelin.postman.co/workspace/0b3b42c7-2047-4c16-85d7-48fca67d7a9c/collection/31128371-9fe56547-c473-4afa-b895-4b992b667b23?action=share&source=collection_link&creator=31128371"
 	},
 	"item": [
 		{
@@ -138,7 +139,7 @@
 	"variable": [
 		{
 			"key": "base_url",
-			"value": "http://localhost:3000"
+			"value": "https://user-service-challenge-999022673097.us-central1.run.app/"
 		}
 	]
 }
