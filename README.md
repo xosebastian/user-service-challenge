@@ -69,7 +69,7 @@ PORT=3000
 * **Actualizar Usuario**
 
   * `PUT /users/:id`
-  * Cuerpo: `{ "name": "string", "email": "number" }`
+  * Cuerpo: `{ "name": "string", "age": "number" }`
 
 * **Eliminar Usuario**
 
@@ -80,9 +80,6 @@ PORT=3000
 ```bash
 # Ejecutar pruebas unitarias
 npm run test
-```
-
-```bash
 # Ejecutar pruebas de integración
 npm run test:integration
 ```
