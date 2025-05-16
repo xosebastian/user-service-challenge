@@ -1,0 +1,20 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - npm i -g typescript
+      - npm i -g @nestjs/cli
+  build:
+    commands:
+      - npm install
+      - npm run prebuild
+      - npm run build
+  post_build:
+    commands:
+      #- npm run test
+      #- npm run test:e2e
+artifacts:
+  files:
+    - '**/*'
