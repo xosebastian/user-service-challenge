@@ -79,9 +79,7 @@ describe('UpdateUserHandler', () => {
       existingUser.age = 30;
 
       jest.spyOn(userRepository, 'findById').mockResolvedValue(existingUser);
-      jest
-        .spyOn(userRepository, 'save')
-        .mockRejectedValue(new Error('Database Error'));
+      jest.spyOn(userRepository, 'save').mockRejectedValue(new Error('Database Error'));
 
       await expect(handler.execute(command)).rejects.toThrow('Database Error');
     });

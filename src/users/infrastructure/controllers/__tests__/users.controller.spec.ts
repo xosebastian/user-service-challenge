@@ -41,17 +41,13 @@ describe('UsersController', () => {
         .spyOn(commandBus, 'execute')
         .mockRejectedValueOnce(new BadRequestException('Invalid data'));
 
-      await expect(controller.createUser(createUserDto)).rejects.toThrow(
-        BadRequestException,
-      );
+      await expect(controller.createUser(createUserDto)).rejects.toThrow(BadRequestException);
     });
   });
 
   describe('listUsers', () => {
     it('should list all users', async () => {
-      jest
-        .spyOn(queryBus, 'execute')
-        .mockResolvedValueOnce(['User 1', 'User 2']);
+      jest.spyOn(queryBus, 'execute').mockResolvedValueOnce(['User 1', 'User 2']);
 
       const result = await controller.listUsers();
       expect(result).toEqual(['User 1', 'User 2']);

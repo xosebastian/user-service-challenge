@@ -45,10 +45,7 @@ export class UsersController {
   @ApiBadRequestResponse({ description: 'Invalid user data.' })
   @HttpCode(HttpStatus.CREATED)
   async createUser(@Body() createUserDto: CreateUserDto) {
-    const command = new CreateUserCommand(
-      createUserDto.name,
-      createUserDto.age,
-    );
+    const command = new CreateUserCommand(createUserDto.name, createUserDto.age);
     return this.commandBus.execute(command);
   }
 
@@ -91,15 +88,8 @@ export class UsersController {
   @ApiResponse({ status: 200, description: 'User successfully updated.' })
   @ApiNotFoundResponse({ description: 'User not found.' })
   @ApiBadRequestResponse({ description: 'Invalid user data.' })
-  async updateUser(
-    @Param() { id }: UUIDParamDto,
-    @Body() updateUserDto: UpdateUserDto,
-  ) {
-    const command = new UpdateUserCommand(
-      id,
-      updateUserDto.name,
-      updateUserDto.age,
-    );
+  async updateUser(@Param() { id }: UUIDParamDto, @Body() updateUserDto: UpdateUserDto) {
+    const command = new UpdateUserCommand(id, updateUserDto.name, updateUserDto.age);
     return this.commandBus.execute(command);
   }
 

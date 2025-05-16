@@ -55,9 +55,7 @@ describe('CreateUserHandler', () => {
 
     it('should throw an error if user cannot be created', async () => {
       const command = new CreateUserCommand('John Doe', 30);
-      jest
-        .spyOn(userRepository, 'save')
-        .mockRejectedValue(new Error('Database Error'));
+      jest.spyOn(userRepository, 'save').mockRejectedValue(new Error('Database Error'));
 
       await expect(handler.execute(command)).rejects.toThrow('Database Error');
     });

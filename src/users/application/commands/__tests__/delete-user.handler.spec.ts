@@ -41,9 +41,7 @@ describe('DeleteUserHandler', () => {
 
     it('should throw an error if user cannot be deleted', async () => {
       const command = new DeleteUserCommand('999');
-      jest
-        .spyOn(userRepository, 'delete')
-        .mockRejectedValue(new Error('Database Error'));
+      jest.spyOn(userRepository, 'delete').mockRejectedValue(new Error('Database Error'));
 
       await expect(handler.execute(command)).rejects.toThrow('Database Error');
     });
