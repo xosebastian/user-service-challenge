@@ -32,16 +32,47 @@ jobs:
           service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
           export_default_credentials: true
 
-      - name: Enable APIs
+      - name: Decode Service Account Key
+        run: echo "${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}" | base64 --decode > $HOME/gcloud-service-key.json
+
+      - name: Authenticate to Google Cloud
+        run: gcloud auth activate-service-account --key-file=$HOME/gcloud-service-key.json
+
+      - name: Set Google Cloud Project
+        run: gcloud config set project user-service-challenge
+
+      - name: Set Google Cloud Region
+        run: gcloud config set run/region us-central1
+
+      - name: Enable Required APIs
         run: |
           gcloud services enable cloudbuild.googleapis.com \
           artifactregistry.googleapis.com \
           run.googleapis.com
 
+      - name: Create Artifact Registry Repository (if not exists)
+        run: |
+          gcloud artifacts repositories create cloud-run-source-deploy \
+          --repository-format=docker \
+          --location=us-central1 \
+          --description="Repository for Cloud Run deployments" || echo "Repository already exists."
+
+      - name: Assign IAM Permissions to Service Account
+        run: |
+          gcloud projects add-iam-policy-binding user-service-challenge \
+            --member="serviceAccount:github-deploy-service-account@user-service-challenge.iam.gserviceaccount.com" \
+            --role="roles/artifactregistry.reader" || echo "Already has permissions."
+
+          gcloud projects add-iam-policy-binding user-service-challenge \
+            --member="serviceAccount:github-deploy-service-account@user-service-challenge.iam.gserviceaccount.com" \
+            --role="roles/cloudbuild.builds.editor" || echo "Already has permissions."
+
+          gcloud projects add-iam-policy-binding user-service-challenge \
+            --member="serviceAccount:github-deploy-service-account@user-service-challenge.iam.gserviceaccount.com" \
+            --role="roles/run.admin" || echo "Already has permissions."
+
       - name: Deploy to Cloud Run
         run: |
-          gcloud config set project user-service-challenge
-          gcloud config set run/region us-central1
           gcloud run deploy user-service-challenge \
             --source . \
             --platform managed \
@@ -53,3 +84,6 @@ jobs:
             --memory 512Mi \
             --timeout 300s \
             --max-instances 3
+
+      - name: Cleanup Service Account Key
+        run: rm $HOME/gcloud-service-key.json
