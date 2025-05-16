@@ -17,7 +17,7 @@
     "test:watch": "jest --config jest.config.js --watch",
     "test:cov": "jest --config jest.config.js --coverage",
     "test:unit": "jest --config jest.config.js --testPathPattern=src/users/infrastructure/__tests__",
-    "test:integration": "jest --config jest.config.js src/users/__tests__ --coverage",
+    "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm:run": "npx typeorm migration:run",
     "typeorm:revert": "npx typeorm migration:revert"
   },
