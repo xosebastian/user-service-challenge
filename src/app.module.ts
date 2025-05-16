@@ -27,7 +27,7 @@ import configuration from './config/configuration';
           migrationsRun: true,
           migrationsTableName: 'migrations',
           migrations: ['dist/migrations/*.js'],
-          logging: true,
+          logging: false,
         };
       },
     }),
