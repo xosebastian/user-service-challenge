@@ -21,7 +21,7 @@ services:
       dockerfile: Dockerfile
     container_name: user_service_app
     ports:
-      - '3000:3000'
+      - '8080:8080'
     depends_on:
       - postgres
     networks:
